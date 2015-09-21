@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="../webcomponentsjs/webcomponents.min.js" type="text/javascript"></script>
+        <link rel="import" href="../polymer/polymer.html">
+        <link rel="import" href="pho3nix-dialpad.html">
+    </head>
+    <body>
+        <pho3nix-dialpad id=test></pho3nix-dialpad>
+        <script>
+            var test = document.getElementById("test");
+            var states = ["call", "hold", "none"];
+            test.addEventListener("onCallPressed",function(e){ 
+                console.log("onCallPressed", e);
+                test.state = states.shift();
+                states.push(test.state);
+            });
+            test.addEventListener("onHoldPressed", function(e){ 
+                console.log("onHoldPressed", e); 
+                test.state = states.shift();
+                states.push(test.state);
+            })
+            test.addEventListener("onResumePressed", function(e){ 
+                console.log("onResumePressed", e); 
+                test.state = states.shift();
+                states.push(test.state);
+            })
+            
+            test.addEventListener("onNumberPressed", function(e){ console.log("onNumberPressed", e); })
+            test.addEventListener("onNumberLongPressed", function(e){ console.log("onNumberLongPressed", e); })
+            test.addEventListener("onReady", function(e){ console.log("onReady", e); })
+            
+            
+            test.addEventListener("onClearPressed", function(e){ console.log("onClearPressed", e); })
+            test.addEventListener("onTransferPressed", function(e){ console.log("onTransferPressed", e); })
+            test.addEventListener("onConsultPressed", function(e){ console.log("onConsultPressed", e); })
+            test.addEventListener("onConferencePressed", function(e){ console.log("onConferencePressed", e); })
+            test.addEventListener("onEndCallPressed", function(e){ console.log("onEndCallPressed", e); })
+            
+            test.addEventListener("onChange", function(e){ console.log("onChange", e); })
+            
+            test.addEventListener("onStateChanged", function(e){ console.log("onStateChanged", e); })
+        
+        </script>
+    </body>
+</html>

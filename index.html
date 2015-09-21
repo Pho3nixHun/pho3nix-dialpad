@@ -1,0 +1,189 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-from-right-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-up-animation.html">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/browser.min.js"></script>
+
+<!--
+&#xE0BC; dialpad
+&#xE0D1; ring volume
+&#xE620; phone hold
+&#xE61E; phone locked
+-->
+
+<div id=wrapper>
+    <ul>
+        <li>
+            <paper-button toggles class="blue" id=transfer>
+                <span class=icon>&#xE61C;</span>
+                <span class=letters>Transfer</span>
+            </paper-button>
+            <paper-button toggles class="blue" id=consult>
+                <!-- &#xE0BF; -->
+                <span class=icon>&#xE7FB;</span>
+                <span class=letters>Consult</span>
+            </paper-button>
+            <paper-button toggles class="blue" id=conference>
+                <span class=icon>&#xE80D;</span>
+                <span class=letters>Conference</span>
+            </paper-button>
+        </li>
+        <li>
+            <paper-input 
+                id=wholeNumber
+                label="Telephone number" 
+                auto-validate=""
+                pattern="[0-9\+\#\*]*" 
+                error-message="Numbers only!">
+                <paper-icon-button suffix icon="clear" id=clearWholeNumber>&#xE14C;</paper-icon-button>
+            </paper-input>
+            
+        </li>
+        <li>
+            <paper-button id=number1>
+                <span class=number>1</span>
+                <span class=letters>&nbsp;</span>
+            </paper-button>
+            <paper-button id=number2>
+                <span class=number>2</span>
+                <span class=letters>ABC</span>
+            </paper-button>
+            <paper-button id=number3>
+                <span class=number>3</span>
+                <span class=letters>DEF</span>
+            </paper-button>
+        </li>
+        <li>
+            <paper-button id=number4>
+                <span class=number>4</span>
+                <span class=letters>GHI</span>
+            </paper-button>
+            <paper-button id=number5>
+                <span class=number>5</span>
+                <span class=letters>JKL</span>
+            </paper-button>
+            <paper-button id=number6>
+                <span class=number>6</span>
+                <span class=letters>MNO</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button id=number7>
+                <span class=number>7</span>
+                <span class=letters>PQRS</span>
+            </paper-button>
+            <paper-button id=number8>
+                <span class=number>8</span>
+                <span class=letters>TUV</span>
+            </paper-button>
+            <paper-button id=number9>
+                <span class=number>9</span>
+                <span class=letters>WXYZ</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button id=numberStar>
+                <span class=number>*</span>
+                <span class=letters>&nbsp;</span>
+            </paper-button>
+            <paper-button id=number0>
+                <span class=number>0</span>
+                <span class=letters>+</span>
+            </paper-button>
+            <paper-button id=numberHashtag>
+                <span class=number>#</span>
+                <span class=letters>&nbsp;</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button state=none class="c2" id=callHold>
+                <span class="icon call">&#xE0B0;</span>
+                <span class="icon hold">&#xE620;</span>
+                <span class="letters call">Call</span>
+                <span class="letters hold">Hold</span>
+                <span class="letters resume">Resume</span>
+            </paper-button>
+            <paper-button class="c2 red" id=endCall>
+                <span class=icon>&#xE0B1;</span>
+                <span class=letters>End call</span>
+            </paper-button>
+        </li>
+    </ul>
+    <paper-dialog id=dialog entry-animation="slide-down-animation"
+                  exit-animation="slide-up-animation">
+        <h1> HISTORY </h1>
+        <ul> </ul>
+    </paper-dialog>
+</div>
+<script type="text/babel">
+    var dialog = document.getElementById("dialog");
+    var i = 0;
+    var states = ["call", "hold", "none"]
+    var callhold = document.getElementById("callHold");
+    var ul = document.querySelector('#dialog ul');
+    var wholeNumber = document.getElementById("wholeNumber");
+    var clearWholeNumber = document.getElementById("clearWholeNumber");
+    var numbers = document.querySelectorAll("paper-button[id^=number]");
+    
+    
+    
+    callhold.onclick = function(){
+        callhold.setAttribute("state", states[i++]);
+        i = i<states.length?i:0;
+        dialog.toggle();
+    }
+    clearWholeNumber.onclick = function(){ wholeNumber.value = ""; dialog.close(); };
+    
+    for (var i = 0; i < numbers.length; i++){
+        if (numbers[i].getAttribute('id') != 'number0')
+            numbers[i].addEventListener("click", function(){
+                wholeNumber.value += this.querySelector("span.number").innerText;
+            });
+        numbers[i].addEventListener("click", function(){
+            var id = "1";
+            if(typeof(Storage) !== "undefined") {
+                var history = localStorage.getItem("pho3nix-dialpad-"+id);
+                history = (history != null) ? JSON.parse(history) : [];
+                var res = history.filter(function(x) {return x.replace(/\D/g,'').indexOf(wholeNumber.value) > 0});
+                
+                ul.innerHTML = "";
+                for (var i = 0; i < res.length; i++){
+                    var li = document.createElement('li')
+                    li.innerHTML = res[i];
+                    li.addEventListener("click", function(){
+                        dialog.close();
+                        wholeNumber.value = this.innerHTML;
+                    })
+                    ul.appendChild(li);
+                }
+                dialog.noCancelOnOutsideClick = (res.length>0);
+                if (!dialog.opened && dialog.noCancelOnOutsideClick) dialog.open();
+                if (!dialog.noCancelOnOutsideClick) dialog.close();
+                
+            }
+        })
+    }
+    var n0 = document.getElementById("number0");
+    n0.onclick = function(){ return false; };
+    n0.onmousedown = function(e) {
+        n0.setAttribute("data-to-id",setTimeout(function(){
+            wholeNumber.value += "+";
+        },1000));
+        n0.setAttribute("data-to-start", e.timeStamp);
+    }
+    n0.onmouseup = function(e){
+        var pressedTime = e.timeStamp -  n0.getAttribute("data-to-start");
+        if (pressedTime < 1000){
+            clearTimeout(n0.getAttribute("data-to-id"))
+            wholeNumber.value += 0;
+        }
+    }
+    
+</script>

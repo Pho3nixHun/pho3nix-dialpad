@@ -1,0 +1,80 @@
+{
+    "number1": {
+        "text": 1,
+        "subtext": " "
+    },
+    "number2": {
+        "text": 2,
+        "subtext": "ABC"
+    },
+    "number3": {
+        "text": 3,
+        "subtext": "DEF"
+    },
+    "number4": {
+        "text": 4,
+        "subtext": "GHI"
+    },
+    "number5": {
+        "text": 5,
+        "subtext": "JKL"
+    },
+    "number6": {
+        "text": 6,
+        "subtext": "MNO"
+    },
+    "number7": {
+        "text": 7,
+        "subtext": "PQRS"
+    },
+    "number8": {
+        "text": 8,
+        "subtext": "TUV"
+    },
+    "number9": {
+        "text": 9,
+        "subtext": "WXYZ"
+    },
+    "number0": {
+        "text": 0,
+        "subtext": "+"
+    },
+    "star": {
+        "text": "*",
+        "subtext": " "
+    },
+    "hashtag": {
+        "text": "#",
+        "subtext": " "
+    },
+    "transfer": {
+        "text": "TRANSFER"
+    },
+    "consult": {
+        "text": "CONSULT"
+    },
+    "conference": {
+        "text": "CONFERENCE"
+    },
+    "call": {
+        "text": "CALL"
+    },
+    "hold": {
+        "text": "HOLD"
+    },
+    "resume": {
+        "text": "RESUME"
+    },
+    "endcall": {
+        "text": "END CALL"
+    },
+    "placeholder": {
+        "text": "Telephone number"
+    },
+    "validationErrorMessage": {
+        "text": "Numbers only!"
+    },
+    "history": {
+        "text": "HISTORY"
+    }
+}

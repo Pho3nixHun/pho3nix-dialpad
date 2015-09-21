@@ -1,0 +1,125 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-icons/iron-icons.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-dialog/paper-dialog.html">
+<link rel="import" href="../neon-animation/animations/slide-from-left-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-from-right-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-down-animation.html">
+<link rel="import" href="../neon-animation/animations/slide-up-animation.html">
+<link rel="stylesheet" href="css/style.css">
+
+<dom-module id="pho3nix-dialpad">
+    <style>
+        :host{
+            display: block;
+        }
+    </style>
+    <template>
+            <ul>
+        <li>
+            <paper-button class="blue" id=transfer toggles>
+                <span class=icon>&#xE61C;</span>
+                <span class=letters>Transfer</span>
+            </paper-button>
+            <paper-button class="blue" id=consult toggles>
+                <!-- &#xE0BF; -->
+                <span class=icon>&#xE7FB;</span>
+                <span class=letters>Consult</span>
+            </paper-button>
+            <paper-button class="blue" id=conference toggles>
+                <span class=icon>&#xE80D;</span>
+                <span class=letters>Conference</span>
+            </paper-button>
+        </li>
+        <li>
+            <paper-input 
+                id=wholeNumber
+                label="{{labels.placeholder.text}}" 
+                auto-validate=""
+                pattern="[0-9\+\#\*]*" 
+                error-message="{{labels.validationErrorMessage.text}}">
+                <paper-icon-button suffix icon="clear" id=clearWholeNumber>&#xE14C;</paper-icon-button>
+            </paper-input>
+            
+        </li>
+        <li>
+            <paper-button id=number1>
+                <span class=number>{{labels.number1.text}}</span>
+                <span class=letters>{{labels.number1.subtext}}</span>
+            </paper-button>
+            <paper-button id=number2>
+                <span class=number>{{labels.number2.text}}</span>
+                <span class=letters>{{labels.number2.subtext}}</span>
+            </paper-button>
+            <paper-button id=number3>
+                <span class=number>{{labels.number3.text}}</span>
+                <span class=letters>{{labels.number3.subtext}}</span>
+            </paper-button>
+        </li>
+        <li>
+            <paper-button id=number4>
+                <span class=number>{{labels.number4.text}}</span>
+                <span class=letters>{{labels.number4.subtext}}</span>
+            </paper-button>
+            <paper-button id=number5>
+                <span class=number>{{labels.number5.text}}</span>
+                <span class=letters>{{labels.number5.subtext}}</span>
+            </paper-button>
+            <paper-button id=number6>
+                <span class=number>{{labels.number6.text}}</span>
+                <span class=letters>{{labels.number6.subtext}}</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button id=number7>
+                <span class=number>{{labels.number7.text}}</span>
+                <span class=letters>{{labels.number7.subtext}}</span>
+            </paper-button>
+            <paper-button id=number8>
+                <span class=number>{{labels.number8.text}}</span>
+                <span class=letters>{{labels.number8.subtext}}</span>
+            </paper-button>
+            <paper-button id=number9>
+                <span class=number>{{labels.number9.text}}</span>
+                <span class=letters>{{labels.number9.subtext}}</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button id=numberStar>
+                <span class=number>{{labels.star.text}}</span>
+                <span class=letters>{{labels.star.subtext}}</span>
+            </paper-button>
+            <paper-button id=number0>
+                <span class=number>{{labels.number0.text}}</span>
+                <span class=letters>{{labels.number0.subtext}}</span>
+            </paper-button>
+            <paper-button id=numberHashtag>
+                <span class=number>{{labels.hashtag.text}}</span>
+                <span class=letters>{{labels.hashtag.subtext}}</span>
+            </paper-button>
+        </li>
+        <li> 
+            <paper-button state=none class="c2" id=callHold>
+                <span class="icon call">&#xE0B0;</span>
+                <span class="icon hold">&#xE620;</span>
+                <span class="letters call">{{labels.call.text}}</span>
+                <span class="letters hold">{{labels.hold.text}}</span>
+                <span class="letters resume">{{labels.resume.text}}</span>
+            </paper-button>
+            <paper-button class="c2 red" id=endCall>
+                <span class=icon>&#xE0B1;</span>
+                <span class=letters>{{labels.endcall.text}}</span>
+            </paper-button>
+        </li>
+    </ul>
+    <paper-dialog id=dialog entry-animation="slide-down-animation"
+                  exit-animation="slide-up-animation">
+        <h1>{{labels.history.text}}</h1>
+        <ul> </ul>
+    </paper-dialog>
+    </template>
+</dom-module>
+
+<script src="js/main.js"></script>

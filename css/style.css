@@ -1,0 +1,114 @@
+    @import url(font.Oxygen.css);
+    @import url(font.material+icons.css);
+    @import url(../../paper-icon-button/);
+    div#wrapper{ position: relative; }
+    ul{ 
+        list-style: none; 
+        width: 290px; 
+        margin:0; padding: 0; 
+    }
+    ul li{
+        position: relative;
+        display: block;
+    }
+    span{
+        display: block;
+        font-family: 'Oxygen', sans-serif;
+        font-size: 12pt;
+        font-weight: 700;
+        white-space: pre;
+    }
+    span.letters{
+        font-weight: 400;
+        font-size: 8pt;
+    }
+    span.icon{
+        font-size: 24px;  /* Preferred icon size */
+        line-height: 32px;
+        font-family: 'Material Icons';
+    }
+    paper-button{
+        width: 82.5px;
+    }
+    paper-button.c2{
+        width: 123.85px;
+    }
+    li paper-button.c2:nth-of-type(2){
+        float: right;
+        margin-right: 11px;
+    }
+    paper-button.green{
+        color: green;
+    }
+    paper-button.red{
+        color: red;
+    }
+    paper-button.blue{
+        color: #4285f4;
+    }
+    paper-button.yellow{
+        color: #FF9800;
+    }
+    paper-button.blue[toggles][active]:not([style-scope]):not(.style-scope) {
+        background-color: rgba(66, 133, 244, 0.25);
+    }
+    paper-button.green[toggles][active]:not([style-scope]):not(.style-scope) {
+        background-color: rgba(0, 255, 0, 0.25);
+    }
+    paper-button.red[toggles][active]:not([style-scope]):not(.style-scope) {
+        background-color: rgba(255, 0, 0, 0.25);
+    }
+    paper-button.yellow[toggles][active]:not([style-scope]):not(.style-scope) {
+        background-color: rgba(255, 152, 0, 0.25);
+    }
+    paper-button#callHold span{
+        display: none;
+    }
+    paper-button#callHold[state=call]{ color: rgb(255, 152, 0); }
+    paper-button#callHold[state=call] span.icon.hold,
+    paper-button#callHold[state=call] span.letters.hold{        
+        display: block;
+    }
+    paper-button#callHold[state=hold]{ color: rgb(255, 152, 0); }
+    paper-button#callHold[state=hold] span.icon.call,
+    paper-button#callHold[state=hold] span.letters.resume{
+        display: block;
+    } 
+    paper-button#callHold[state=none]{ color: green; }
+    paper-button#callHold[state=none] span.icon.call,
+    paper-button#callHold[state=none] span.letters.call{
+        display: block;
+    }
+    paper-input{
+        display: inline-block;
+        width: 290px;
+        text-align: center;
+    }
+    paper-dialog,
+    paper-dialog.paper-dialog-0{
+        top:0; left:0 !important;
+        margin: 0px; padding: 0px;
+        max-width: 300px;        
+        max-height: 100px;
+        height: 100px !important;
+        box-shadow: none !important;
+        position: absolute;
+        overflow: hidden;
+    }
+    paper-dialog h1{
+        font-size: 12pt;
+        margin: 0 !important;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        background-color: rgba(231,231,231,1);
+        margin-bottom: 2px;
+    }
+    paper-dialog li{
+        font-size: 12pt;
+        padding-left: 16px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+    paper-dialog li:hover{
+        background-color: rgba(231,231,231,1);
+    }
